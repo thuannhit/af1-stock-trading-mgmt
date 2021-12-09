@@ -5,8 +5,8 @@ import type {
 } from 'typeorm';
 import { EventSubscriber } from 'typeorm';
 
-import { UserEntity } from '../modules/user/user.entity';
-import { UtilsProvider } from '../providers/utils.provider';
+import { UtilsProvider } from '../../common/providers/utils.provider';
+import { UserEntity } from '../entities/user.entity';
 
 @EventSubscriber()
 export class UserSubscriber implements EntitySubscriberInterface<UserEntity> {

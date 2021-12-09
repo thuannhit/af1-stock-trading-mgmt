@@ -9,7 +9,7 @@ module.exports = {
     target: 'node',
     externals: [
         nodeExternals({
-            whitelist: ['webpack/hot/poll?100'],
+            allowlist: ['webpack/hot/poll?100'],
         }),
     ],
     module: {
@@ -34,7 +34,8 @@ module.exports = {
         new webpack.ProgressPlugin(),
         new CleanWebpackPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.WatchIgnorePlugin([/\.js$/, /\.d\.ts$/])],
+        new webpack.WatchIgnorePlugin({paths: [ /\.js$/, /\.d\.ts$/ ]})
+    ],
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'main.js',

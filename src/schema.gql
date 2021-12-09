@@ -1,0 +1,18 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""user """
+type User {
+  id: ID!
+  lastName: String!
+  firstName: String!
+  phoneNumber: String!
+  email: String!
+  bankAccountNo: String!
+  status: String!
+}
+
+type Query {
+  getUser(id: String!): User!
+}

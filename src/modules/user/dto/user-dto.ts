@@ -2,7 +2,7 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 import { AbstractDto } from '../../../common/dto/abstract.dto';
 import { RoleType } from '../../../constants/role-type';
-import type { UserEntity } from '../user.entity';
+import type { UserEntity } from '../../../database/entities/user.entity';
 
 export type UserDtoOptions = Partial<{ isActive: boolean }>;
 

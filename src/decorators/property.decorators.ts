@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import type { ApiPropertyOptions } from '@nestjs/swagger/dist/decorators/api-property.decorator';
 
-import { UtilsProvider } from '../providers';
+import { UtilsProvider } from '../common/providers';
 
 export function ApiBooleanProperty(
   options: Omit<ApiPropertyOptions, 'type'> = {},

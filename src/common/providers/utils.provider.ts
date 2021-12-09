@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 
-import type { Optional } from '../types';
+import type { Optional } from '../../types';
 
 export class UtilsProvider {
   /**

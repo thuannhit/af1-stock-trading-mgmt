@@ -4,8 +4,8 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 
 import type { RoleType } from '../../constants/role-type';
 import { TokenType } from '../../constants/token-type';
+import type { UserEntity } from '../../database/entities/user.entity';
 import { ApiConfigService } from '../../shared/services/api-config.service';
-import type { UserEntity } from '../user/user.entity';
 import { UserService } from '../user/user.service';
 
 @Injectable()

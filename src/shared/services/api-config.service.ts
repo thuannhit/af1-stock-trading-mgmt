@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import type { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { isNil } from 'lodash';
 
-import { UserSubscriber } from '../../entity-subscribers/user-subscriber';
+import { UserSubscriber } from '../../database/entity-subscribers/user-subscriber';
 import { SnakeNamingStrategy } from '../../snake-naming.strategy';
 
 @Injectable()
@@ -57,12 +57,12 @@ export class ApiConfigService {
   }
 
   get typeOrmConfig(): TypeOrmModuleOptions {
-    let entities = [__dirname + '/../../modules/**/*.entity{.ts,.js}'];
+    let entities = [__dirname + '/../../database/entities/*.entity{.ts,.js}'];
     let migrations = [__dirname + '/../../database/migrations/*{.ts,.js}'];
 
     if (module.hot) {
       const entityContext = require.context(
-        './../../modules',
+        './../../database/entities',
         true,
         /\.entity\.ts$/,
       );
@@ -92,6 +92,7 @@ export class ApiConfigService {
       keepConnectionAlive: !this.isTest,
       dropSchema: this.isTest,
       type: 'postgres',
+      name: 'default',
       host: this.getString('DB_HOST'),
       port: this.getNumber('DB_PORT'),
       username: this.getString('DB_USERNAME'),

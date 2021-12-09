@@ -2,8 +2,10 @@ import { Injectable } from '@nestjs/common';
 import type { FindConditions } from 'typeorm';
 
 import type { PageDto } from '../../common/dto/page.dto';
-import { FileNotImageException } from '../../exceptions/file-not-image.exception';
-import { UserNotFoundException } from '../../exceptions/user-not-found.exception';
+import { FileNotImageException } from '../../common/exceptions/file-not-image.exception';
+import { UserNotFoundException } from '../../common/exceptions/user-not-found.exception';
+import type { UserEntity } from '../../database/entities/user.entity';
+import { UserRepository } from '../../database/repositories/user.repository';
 import type { IFile } from '../../interfaces';
 import { AwsS3Service } from '../../shared/services/aws-s3.service';
 import { ValidatorService } from '../../shared/services/validator.service';
@@ -11,8 +13,6 @@ import type { Optional } from '../../types';
 import type { UserRegisterDto } from '../auth/dto/UserRegisterDto';
 import type { UserDto } from './dto/user-dto';
 import type { UsersPageOptionsDto } from './dto/users-page-options.dto';
-import type { UserEntity } from './user.entity';
-import { UserRepository } from './user.repository';
 
 @Injectable()
 export class UserService {
@@ -30,7 +30,7 @@ export class UserService {
   }
 
   async findByUsernameOrEmail(
-    options: Partial<{ username: string; email: string }>,
+    options: Partial<{ username: string; email: string; id: string }>,
   ): Promise<Optional<UserEntity>> {
     const queryBuilder = this.userRepository.createQueryBuilder('user');
 
@@ -43,6 +43,12 @@ export class UserService {
     if (options.username) {
       queryBuilder.orWhere('user.username = :username', {
         username: options.username,
+      });
+    }
+
+    if (options.id) {
+      queryBuilder.orWhere('user.id = :id', {
+        id: options.id,
       });
     }
 

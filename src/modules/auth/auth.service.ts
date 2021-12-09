@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { UserNotFoundException } from '../../exceptions/user-not-found.exception';
-import { UtilsProvider } from '../../providers/utils.provider';
+import { UserNotFoundException } from '../../common/exceptions/user-not-found.exception';
+import { UtilsProvider } from '../../common/providers/utils.provider';
+import type { UserEntity } from '../../database/entities/user.entity';
 import { ApiConfigService } from '../../shared/services/api-config.service';
 import type { UserDto } from '../user/dto/user-dto';
-import type { UserEntity } from '../user/user.entity';
 import { UserService } from '../user/user.service';
 import { TokenPayloadDto } from './dto/TokenPayloadDto';
 import type { UserLoginDto } from './dto/UserLoginDto';

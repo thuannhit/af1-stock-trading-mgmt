@@ -2,7 +2,7 @@ import { Transform, TransformationType } from 'class-transformer';
 import { parsePhoneNumber } from 'libphonenumber-js';
 import { castArray, isNil, trim } from 'lodash';
 
-import { GeneratorProvider } from '../providers';
+import { GeneratorProvider } from '../common/providers';
 
 /**
  * @description trim spaces from start and end, replace multiple spaces with one.

@@ -3,7 +3,12 @@ import './boilerplate.polyfill';
 import type { MiddlewareConsumer, NestModule } from '@nestjs/common';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import {
+  ApolloServerPluginLandingPageLocalDefault,
+  ApolloServerPluginLandingPageProductionDefault,
+} from 'apollo-server-core';
 import { I18nJsonParser, I18nModule } from 'nestjs-i18n';
 import path from 'path';
 
@@ -43,6 +48,22 @@ import { SharedModule } from './shared/shared.module';
       inject: [ApiConfigService],
     }),
     HealthCheckerModule,
+    GraphQLModule.forRoot({
+      playground: false,
+      plugins: [
+        // For using graphql-playground as a GraphQL IDE for local development
+        // ApolloServerPluginLandingPageGraphQLPlayground()
+
+        // For using Apollo Sandbox as a GraphQL IDE for local development
+        process.env.NODE_ENV === 'production'
+          ? ApolloServerPluginLandingPageProductionDefault({
+              graphRef: 'my-graph-id@my-graph-variant',
+              footer: false,
+            })
+          : ApolloServerPluginLandingPageLocalDefault({ footer: false }),
+      ],
+      autoSchemaFile: path.join(process.cwd(), 'src/schema.gql'),
+    }),
   ],
 })
 export class AppModule implements NestModule {

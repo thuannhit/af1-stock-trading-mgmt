@@ -4,7 +4,13 @@
     "sourceRoot": "src",
     "compilerOptions": {
         "plugins": [
-            "@nestjs/swagger/plugin"
+            "@nestjs/swagger/plugin",
+            {
+                "name": "@nestjs/graphql",
+                "options": {
+                  "introspectComments": true
+                }
+            }
         ],
         "assets": [
             {

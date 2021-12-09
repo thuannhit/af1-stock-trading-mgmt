@@ -10,11 +10,11 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { PageDto } from '../../common/dto/page.dto';
 import { RoleType } from '../../constants/role-type';
+import { UserEntity } from '../../database/entities/user.entity';
 import { Auth, AuthUser, UUIDParam } from '../../decorators';
 import { TranslationService } from '../../shared/services/translation.service';
 import { UserDto } from './dto/user-dto';
 import { UsersPageOptionsDto } from './dto/users-page-options.dto';
-import { UserEntity } from './user.entity';
 import { UserService } from './user.service';
 
 @Controller('users')
